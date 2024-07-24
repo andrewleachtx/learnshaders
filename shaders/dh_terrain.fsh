@@ -1,15 +1,13 @@
-#version 460
+#version 460 compatibility
 
 // Atlases or maps based on UV data
-uniform sampler2D gtexture;
 uniform sampler2D lightmap;
 
 /* DRAWBUFFERS:0 */
 // outColor0 should go to the first color attachment draw buffer
 layout (location = 0) out vec4 outColor0;
 
-in vec2 texCoords;
-in vec3 foliageColor;
+in vec4 blockColor;
 in vec2 lightMapCoords;
 
 void main() {
@@ -17,8 +15,8 @@ void main() {
     vec3 lightColor = pow(texture(lightmap, lightMapCoords).rgb, vec3(2.2));
 
     // Our current color is grayscaled
-    vec4 outputColorTexture = pow(texture(gtexture, texCoords), vec4(2.2));
-    vec3 outputColor = outputColorTexture.rgb * pow(foliageColor, vec3(2.2)) * lightColor;
+    vec4 outputColorTexture = blockColor;
+    vec3 outputColor = outputColorTexture.rgb * lightColor;
     float transparency = outputColorTexture.a;
 
     // Account for transparent values
