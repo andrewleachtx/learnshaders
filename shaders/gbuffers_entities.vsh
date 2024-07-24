@@ -1,10 +1,6 @@
 #version 460
 #include "common.glsl"
-
-#define MV modelViewMatrix
-#define MVit modelViewMatrixInverse
-#define P projectionMatrix
-#define gMVit gbufferModelViewInverse // this is "closer" to MVit
+#include "defines.glsl"
 
 uniform vec3 chunkOffset; // all chunks have a unique offset within model space
 uniform mat4 modelViewMatrix;       

@@ -1,11 +1,8 @@
 #version 460
 #include "common.glsl"
+#include "defines.glsl"
 
 // https://github.com/sp614x/optifine/blob/master/OptiFineDoc/doc/shaders.txt
-
-#define MV modelViewMatrix
-#define MVit modelViewMatrixInverse
-#define P projectionMatrix
 
 // MV, MVit, P to convert to screen space
 uniform mat4 modelViewMatrix;       
