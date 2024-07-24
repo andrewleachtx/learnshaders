@@ -2,34 +2,27 @@
 #include "common.glsl"
 #include "defines.glsl"
 
-// https://github.com/sp614x/optifine/blob/master/OptiFineDoc/doc/shaders.txt
-
-// MV, MVit, P to convert to screen space
+// Uniforms
+uniform vec3 chunkOffset; // all chunks have a unique offset within model space
 uniform mat4 modelViewMatrix;       
 uniform mat4 modelViewMatrixInverse;
 uniform mat4 projectionMatrix;
+uniform vec3 cameraPosition; // camera in world space
+uniform mat4 gbufferModelViewInverse; // "closer" to MVit
 
-// Not attribute anymore bc geometry shader. Simply in/out
-in vec3 vaPosition; // stores (x y z) for a given vertex - vertex attribute == va
-
-// Texture map coordinates use a texture atlas
+// Attributes
+in vec3 vaPosition;
 in vec2 vaUV0;
+in vec4 vaColor; // (r, g, b, a) of a vertex
 
+// Varying
 out vec2 texCoords;
+out vec3 foliageColor;
 
 void main() {
-    // We move from object -> world -> view -> clip space, where v_c = projection * modelview * vaPosition
-    // OpenGL handles perspective division and clipping once in clip space.
-    gl_Position = P * MV * vec4(vaPosition, 1.0);
-
     texCoords = vaUV0;
+    foliageColor = vaColor.rgb;
 
-    /*
-        static void resize_callback(GLFWwindow *window, int width, int height) {
-            glViewport(0, 0, width, height);
-        }
-
-        This exemplifies how glViewport is used to convert gl_Position (after OpenGL does perspective & clips) from
-        clip -> ndc -> screen space
-    */
+    // vec3 vaPosChunk = vaPosition + chunkOffset;
+    gl_Position = P * MV * vec4(vaPosition, 1.0);
 }
