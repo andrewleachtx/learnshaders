@@ -1,0 +1,1 @@
+uniform float HORIZON_CURVE_OFFSET = 0.1;

@@ -1,4 +1,5 @@
 #version 460
+#include "common.glsl"
 
 // https://github.com/sp614x/optifine/blob/master/OptiFineDoc/doc/shaders.txt
 

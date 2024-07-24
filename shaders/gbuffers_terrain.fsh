@@ -1,4 +1,5 @@
 #version 460
+#include "common.glsl"
 
 // Inbuilt gtexture
 uniform sampler2D gtexture;
